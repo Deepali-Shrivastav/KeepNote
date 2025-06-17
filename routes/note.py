@@ -9,6 +9,7 @@ from schemas.note import noteEntity, notesEntity
 note = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
+
 @note.get("/", response_class=HTMLResponse)
 async def read_item(request: Request):
     docs = conn.notes.notes.find({})
@@ -16,11 +17,23 @@ async def read_item(request: Request):
     for doc in docs:
         newDocs.append({
             "id": doc["_id"],
-            "note": doc["note"]
+            "title": doc["title"],
+            "desc": doc["desc"],
+            "important": doc["important"],
         })
     return templates.TemplateResponse("index.html", {"request": request, "newDocs": newDocs})
 
 
-@note.get("/items/{item_id}")
-def read_item(item_id: int, q: str | None = None):
-    return {"item_id": item_id, "q": q}
+@note.post("/")
+async def create_item(request: Request):
+    form = await request.form()
+    formDict = dict(form)
+    formDict["important"] = True if formDict.get("important") == "on" else False
+    # print(formDict)
+    note = conn.notes.notes.insert_one(formDict)
+    return {"Success": True}
+
+
+
+
+
