@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/notes_hub.iml" filepath="$PROJECT_DIR$/.idea/notes_hub.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../KeepNote/.idea/KeepNote.iml" filepath="$PROJECT_DIR$/../KeepNote/.idea/KeepNote.iml" />
     </modules>
   </component>
 </project>
